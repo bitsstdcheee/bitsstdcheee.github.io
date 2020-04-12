@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://bitsstdcheee.github.io/"/>
-  <updated>2020-04-12T14:39:56.279Z</updated>
+  <updated>2020-04-12T15:40:35.396Z</updated>
   <id>https://bitsstdcheee.github.io/</id>
   
   <author>
@@ -17,28 +17,32 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>访问Github速度慢的解决方案</title>
-    <link href="https://bitsstdcheee.github.io/article/db0ba348/"/>
-    <id>https://bitsstdcheee.github.io/article/db0ba348/</id>
-    <published>2020-04-12T12:23:49.000Z</published>
-    <updated>2020-04-12T14:39:56.279Z</updated>
+    <title>洛谷日报 - 浅谈底层常数优化及编译器优化</title>
+    <link href="https://bitsstdcheee.github.io/article/4e9dae50/"/>
+    <id>https://bitsstdcheee.github.io/article/4e9dae50/</id>
+    <published>2020-04-12T15:34:19.000Z</published>
+    <updated>2020-04-12T15:40:35.396Z</updated>
     
-    <content type="html"><![CDATA[<blockquote><p>本文参考链接:</p><p><a href="https://blog.csdn.net/tsq292978891/article/details/78260066" target="_blank" rel="noopener">Github访问速度慢的解决方法</a></p></blockquote><h1 id="一、更改hosts文件"><a href="#一、更改hosts文件" class="headerlink" title="一、更改hosts文件"></a>一、更改<code>hosts</code>文件</h1><h2 id="1-查询IP"><a href="#1-查询IP" class="headerlink" title="1.查询IP"></a>1.查询IP</h2><p>先去<a href="https://www.ipaddress.com/" target="_blank" rel="noopener">IPAddress</a>这个网站查询<code>github.com</code>和<code>github.global.ssl.fastly.net</code></p><p>文章编辑时间的查询结果:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">github.com                      140.82.113.4</span><br><span class="line">github.global.ssl.fastly.net    199.232.69.194</span><br></pre></td></tr></table></figure><h2 id="2-修改hosts文件"><a href="#2-修改hosts文件" class="headerlink" title="2.修改hosts文件"></a>2.修改<code>hosts</code>文件</h2><p>打开<code>hosts</code>文件:<br>路径:<code>C:\Windows\System32\drivers\etc</code></p><p>修改<code>hosts</code>文件:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">140.82.113.4 github.com</span><br><span class="line">199.232.69.194 github.global.ssl.fastly.net</span><br></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 3.刷新DNS缓存</span><br><span class="line">### Unix</span><br><span class="line">&#96;&#96;&#96;bash</span><br><span class="line">sudo &#x2F;etc&#x2F;init.d&#x2F;networking restart</span><br></pre></td></tr></table></figure><h3 id="Windows-cmd"><a href="#Windows-cmd" class="headerlink" title="Windows(cmd)"></a>Windows(<code>cmd</code>)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ipconfig &#x2F;flushdns</span><br></pre></td></tr></table></figure><h1 id="二、缓存部分文件"><a href="#二、缓存部分文件" class="headerlink" title="二、缓存部分文件"></a>二、缓存部分文件</h1><h2 id="1-发现加载时间长的文件"><a href="#1-发现加载时间长的文件" class="headerlink" title="1.发现加载时间长的文件"></a>1.发现加载时间长的文件</h2><p>这是我的浏览器版本，其他浏览器都可以对以下步骤进行类似的操作，请自行探索:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Google Chrome 版本 80.0.3987.162（正式版本） （64 位）</span><br></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<h1 id="更好的阅读体验"><a href="#更好的阅读体验" class="headerlink" title="更好的阅读体验"></a><a href="https://blog.zhaojinxi.top/2020/02/03/optimize/" target="_blank" rel="noopener">更好的阅读体验</a></h1><p><strong>因为你谷的 markdown 实在是有毒，部分代码块中使用美元符号会导致整篇文章排版错误。因此对部分代码做了改动，已在修改处做了标注 <del>推荐点击上面蓝色字</del></strong></p><p><strong>注：阅读本文可能需要有汇编语言基础。</strong></p><p>[2020-03-10 upd] 修正若干错误<br>[2020-03-11 upd] 添加汇编扩栈的方法<br>[2020-04-07 upd] 修正若干错误</p><h1 id="测试环境"><a href="#测试环境" class="headerlink" title="测试环境"></a>测试环境</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">zhaojinxi@ubuntu:~ $ lsb_release -a</span><br><span class="line">No LSB modules are available.</span><br><span class="line">Distributor ID:Ubuntu</span><br><span class="line">Description:Ubuntu 18.04.3 LTS</span><br><span class="line">Release:18.04</span><br><span class="line">Codename:bionic</span><br><span class="line">zhaojinxi@ubuntu:~ $ g++ --version</span><br><span class="line">g++ (Ubuntu 7.4.0-1ubuntu1~18.04.1) 7.4.0</span><br><span class="line">Copyright (C) 2017 Free Software Foundation, Inc.</span><br><span class="line">This is free software; see the source for copying conditions.  There is NO</span><br><span class="line">warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.</span><br></pre></td></tr></table></figure>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;blockquote&gt;
-&lt;p&gt;本文参考链接:&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://blog.csdn.net/tsq292978891/article/details/78260066&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Github访问
+        &lt;h1 id=&quot;更好的阅读体验&quot;&gt;&lt;a href=&quot;#更好的阅读体验&quot; class=&quot;headerlink&quot; title=&quot;更好的阅读体验&quot;&gt;&lt;/a&gt;&lt;a href=&quot;https://blog.zhaojinxi.top/2020/02/03/optimize/&quot; target=
       
     
     </summary>
     
     
+      <category term="洛谷日报" scheme="https://bitsstdcheee.github.io/categories/%E6%B4%9B%E8%B0%B7%E6%97%A5%E6%8A%A5/"/>
     
-      <category term="Github" scheme="https://bitsstdcheee.github.io/tags/Github/"/>
+      <category term="转载" scheme="https://bitsstdcheee.github.io/categories/%E6%B4%9B%E8%B0%B7%E6%97%A5%E6%8A%A5/%E8%BD%AC%E8%BD%BD/"/>
+    
+    
+      <category term="优化,底层常数优化" scheme="https://bitsstdcheee.github.io/tags/%E4%BC%98%E5%8C%96-%E5%BA%95%E5%B1%82%E5%B8%B8%E6%95%B0%E4%BC%98%E5%8C%96/"/>
+    
+      <category term="优化,译器优化" scheme="https://bitsstdcheee.github.io/tags/%E4%BC%98%E5%8C%96-%E8%AF%91%E5%99%A8%E4%BC%98%E5%8C%96/"/>
     
   </entry>
   
