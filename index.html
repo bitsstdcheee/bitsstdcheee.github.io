@@ -88,20 +88,21 @@ function activateLightMode(){
       theme: 'default',
   })
 })
-}</script><script src="https://cdn.jsdelivr.net/npm/typed.js"></script><script type="text/javascript" src="http://yijuzhan.com/api/word.php?m=js"></script><script>var subtitleEffect = true
-var con = str[0];
-if (subtitleEffect){
-  var from = "出自 " + str[1];
-  var sub = '今日事&#44;今日毕,Never put off till tomorrow what you can do today'.length == 0  ? new Array() : '今日事&#44;今日毕,Never put off till tomorrow what you can do today'.split(",");
-  var both = sub.unshift(con,from)
-  var typed = new Typed("#subtitle", {
-    strings: sub,
-    startDelay: 300,
-    typeSpeed: 150,
-    loop: true,
-    backSpeed: 50
-  });
-}else{
-  document.getElementById("subtitle").innerHTML = con
-}
+}</script><script src="https://cdn.jsdelivr.net/npm/typed.js"></script><script type="text/javascript" src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script><script>var subtitleEffect = true
+jinrishici.load(function(result) {
+  if (subtitleEffect){
+    var sub = '今日事&#44;今日毕,Never put off till tomorrow what you can do today'.length == 0  ? new Array() : '今日事&#44;今日毕,Never put off till tomorrow what you can do today'.split(",");
+    var content = result.data.content;
+    var both = sub.unshift(content)
+    var typed = new Typed("#subtitle", {
+      strings: sub,
+      startDelay: 300,
+      typeSpeed: 150,
+      loop: true,
+      backSpeed: 50
+    });
+  }else{
+    document.getElementById("subtitle").innerHTML = result.data.content        
+  }
+})
 </script></body></html>
