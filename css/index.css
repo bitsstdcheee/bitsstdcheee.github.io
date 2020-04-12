@@ -3013,9 +3013,8 @@ figure.gallery-group .gallery-group-name:after {
   position: relative;
   margin: 0 0 1rem;
   padding: 15px;
-  border: initial;
-  border-left: 5px solid #eee;
-  background-color: #f9f9f9;
+  border: 1px solid transparent;
+  background-color: #f5f5f5;
   border-radius: 3px;
 }
 .note h2,
@@ -3057,94 +3056,112 @@ figure.gallery-group .gallery-group-name:after {
   font-family: 'FontAwesome';
 }
 .note.default {
-  background-color: #f7f7f7;
-  border-left-color: #777;
+  border-color: #e1e1e1;
+  background-color: #f3f3f3;
+  color: #666;
 }
-.note.default h2,
-.note.default h3,
-.note.default h4,
-.note.default h5,
-.note.default h6 {
-  color: #777;
+.note.default a:not(.btn),
+.note.default span.exturl:not(.btn) {
+  border-bottom: 1px solid #666;
+  color: #666;
+}
+.note.default a:not(.btn):hover,
+.note.default span.exturl:not(.btn):hover {
+  border-bottom: 1px solid #454545;
+  color: #454545;
 }
 .note.default:not(.no-icon)::before {
   content: '\f0a9';
-  color: #777;
 }
 .note.primary {
-  background-color: #f5f0fa;
-  border-left-color: #6f42c1;
-}
-.note.primary h2,
-.note.primary h3,
-.note.primary h4,
-.note.primary h5,
-.note.primary h6 {
+  border-color: #e1c2ff;
+  background-color: #f3daff;
   color: #6f42c1;
+}
+.note.primary a:not(.btn),
+.note.primary span.exturl:not(.btn) {
+  border-bottom: 1px solid #6f42c1;
+  color: #6f42c1;
+}
+.note.primary a:not(.btn):hover,
+.note.primary span.exturl:not(.btn):hover {
+  border-bottom: 1px solid #453298;
+  color: #453298;
 }
 .note.primary:not(.no-icon)::before {
   content: '\f055';
-  color: #6f42c1;
 }
 .note.info {
-  background-color: #eef7fa;
-  border-left-color: #428bca;
+  border-color: #b3e5ef;
+  background-color: #d9edf7;
+  color: #31708f;
 }
-.note.info h2,
-.note.info h3,
-.note.info h4,
-.note.info h5,
-.note.info h6 {
-  color: #428bca;
+.note.info a:not(.btn),
+.note.info span.exturl:not(.btn) {
+  border-bottom: 1px solid #31708f;
+  color: #31708f;
+}
+.note.info a:not(.btn):hover,
+.note.info span.exturl:not(.btn):hover {
+  border-bottom: 1px solid #215761;
+  color: #215761;
 }
 .note.info:not(.no-icon)::before {
   content: '\f05a';
-  color: #428bca;
 }
 .note.success {
-  background-color: #eff8f0;
-  border-left-color: #5cb85c;
+  border-color: #d0e6be;
+  background-color: #dff0d8;
+  color: #3c763d;
 }
-.note.success h2,
-.note.success h3,
-.note.success h4,
-.note.success h5,
-.note.success h6 {
-  color: #5cb85c;
+.note.success a:not(.btn),
+.note.success span.exturl:not(.btn) {
+  border-bottom: 1px solid #3c763d;
+  color: #3c763d;
+}
+.note.success a:not(.btn):hover,
+.note.success span.exturl:not(.btn):hover {
+  border-bottom: 1px solid #32562c;
+  color: #32562c;
 }
 .note.success:not(.no-icon)::before {
   content: '\f058';
-  color: #5cb85c;
 }
 .note.warning {
-  background-color: #fdf8ea;
-  border-left-color: #f0ad4e;
+  border-color: #fae4cd;
+  background-color: #fcf4e3;
+  color: #8a6d3b;
 }
-.note.warning h2,
-.note.warning h3,
-.note.warning h4,
-.note.warning h5,
-.note.warning h6 {
-  color: #f0ad4e;
+.note.warning a:not(.btn),
+.note.warning span.exturl:not(.btn) {
+  border-bottom: 1px solid #8a6d3b;
+  color: #8a6d3b;
+}
+.note.warning a:not(.btn):hover,
+.note.warning span.exturl:not(.btn):hover {
+  border-bottom: 1px solid #714f30;
+  color: #714f30;
 }
 .note.warning:not(.no-icon)::before {
   content: '\f06a';
-  color: #f0ad4e;
 }
 .note.danger {
-  background-color: #fcf1f2;
-  border-left-color: #d9534f;
+  border-color: #ebcdd2;
+  background-color: #f2dfdf;
+  color: #a94442;
 }
-.note.danger h2,
-.note.danger h3,
-.note.danger h4,
-.note.danger h5,
-.note.danger h6 {
-  color: #d9534f;
+.note.danger a:not(.btn),
+.note.danger span.exturl:not(.btn) {
+  border-bottom: 1px solid #a94442;
+  color: #a94442;
+}
+.note.danger a:not(.btn):hover,
+.note.danger span.exturl:not(.btn):hover {
+  border-bottom: 1px solid #84333f;
+  color: #84333f;
 }
 .note.danger:not(.no-icon)::before {
   content: '\f056';
-  color: #d9534f;
 }
 .layout_page {
   display: -webkit-box;
@@ -4680,7 +4697,6 @@ img {
 }
 [data-theme='dark'] .note {
   filter: brightness(0.7);
-  color: #4c4948;
 }
 [data-theme='dark'] #hexo-blog-encrypt label,
 [data-theme='dark'] #hexo-blog-encrypt input {
